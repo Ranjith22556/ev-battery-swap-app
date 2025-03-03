@@ -1,0 +1,21 @@
+To add an EV bike image to the website:
+
+1. Download a free EV bike image from one of these sources:
+   - Unsplash: https://unsplash.com/s/photos/electric-bike
+   - Pexels: https://www.pexels.com/search/electric%20bike/
+   - Pixabay: https://pixabay.com/images/search/electric%20bike/
+
+2. Rename the downloaded image to "ev-bike.jpg" (or .png depending on the format)
+
+3. Place the image in this directory (public/images/)
+
+4. Restart the development server with:
+   npm run dev
+
+The image will automatically appear in the "Ready to get started?" section of the homepage.
+
+Recommended image specifications:
+- Resolution: At least 1200x800 pixels
+- Aspect ratio: 3:2 or 16:9 works best
+- File size: Optimized for web (under 500KB if possible)
+- Content: High-quality image of an electric bike or someone riding one 
