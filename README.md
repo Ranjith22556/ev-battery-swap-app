@@ -32,8 +32,8 @@ A modern web application for electric vehicle battery swapping and e-bike rental
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ranjith22556/ev-battery-swap-rental.git
-   cd ev-battery-swap-rental
+   git clone https://github.com/ranjith22556/ev-battery-swap-system.git
+   cd ev-battery-swap-system
    ```
 
 2. Install dependencies:
