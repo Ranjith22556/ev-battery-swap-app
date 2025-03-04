@@ -18,8 +18,10 @@ export default function Confirmation() {
   const bikeId = searchParams.get("bike") ? Number.parseInt(searchParams.get("bike")!) : null
   const hours = searchParams.get("hours") ? Number.parseInt(searchParams.get("hours")!) : null
   const pin = searchParams.get("pin")
+  const batteryId = searchParams.get("batteryId")
   
   const [copied, setCopied] = useState(false)
+  const [copiedBatteryId, setCopiedBatteryId] = useState(false)
   
   // Get details based on type
   const batteryWarehouse = id ? batteryWarehouses.find(w => w.id === id) : null
@@ -135,6 +137,39 @@ export default function Confirmation() {
                           <p className="text-sm text-muted-foreground">
                             One fully charged battery
                           </p>
+                          {batteryId && (
+                            <div className="mt-2 p-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
+                              <p className="text-xs font-medium text-green-800 dark:text-green-300">Battery ID (Confidential)</p>
+                              <div className="flex items-center justify-between mt-1">
+                                <code className="text-sm font-mono bg-green-100 dark:bg-green-800/30 px-2 py-0.5 rounded">
+                                  {batteryId}
+                                </code>
+                                <button 
+                                  className="text-xs text-primary flex items-center"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(batteryId);
+                                    setCopiedBatteryId(true);
+                                    setTimeout(() => setCopiedBatteryId(false), 2000);
+                                  }}
+                                >
+                                  {copiedBatteryId ? (
+                                    <>
+                                      <Check className="h-3 w-3 mr-1" />
+                                      Copied
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Copy className="h-3 w-3 mr-1" />
+                                      Copy
+                                    </>
+                                  )}
+                                </button>
+                              </div>
+                              <p className="text-xs text-green-700 dark:text-green-400 mt-1">
+                                Keep this ID confidential. You'll need it for service and warranty.
+                              </p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ) : (

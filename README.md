@@ -1,85 +1,58 @@
 # EV Battery Swap & Rental System
 
-A modern web application for electric vehicle battery swapping and e-bike rental services.
+A modern web application for managing electric vehicle battery swapping and rental services.
 
 ## Features
 
-- **User Authentication**: Secure sign-in with Google OAuth
-- **Battery Swap Service**: Find nearby battery swap stations and exchange depleted batteries for fully charged ones
-- **E-Bike Rental**: Rent electric bikes for hourly use
-- **Interactive Maps**: Locate nearby service stations
-- **Secure Payment Processing**: Simulated payment system with PIN generation
-- **Responsive Design**: Works on desktop and mobile devices
+- **User Authentication**: Secure login and registration system
+- **Battery Swap Management**: Schedule and manage battery swaps
+- **Rental Services**: Rent batteries for different durations
+- **Station Locator**: Find nearby battery swap stations
+- **Payment Integration**: Secure payment processing
+- **User Dashboard**: Track usage, payments, and history
+- **Battery Health Monitoring**: Advanced system to track and analyze battery performance
 
-## Tech Stack
+## Battery Health Monitoring System
 
-- **Frontend**: Next.js 14, React, TypeScript
-- **Styling**: Tailwind CSS, shadcn/ui components
-- **Authentication**: NextAuth.js with Google provider
-- **Database**: MongoDB
-- **State Management**: React Context API
+Our state-of-the-art battery health monitoring system provides comprehensive insights into battery performance and longevity:
+
+### Key Features
+
+- **Real-time Health Metrics**: Monitor battery health percentage, charge cycles, and efficiency scores
+- **Performance Visualization**: Interactive charts for temperature, voltage, and health trends
+- **Charge Cycle Tracking**: Track the number of charge cycles against maximum rated cycles
+- **Predictive Analytics**: AI-powered predictions for battery end-of-life dates
+- **Swap History**: Detailed records of battery swap events and conditions
+
+### Battery Fleet Overview
+
+The system manages various battery models with different characteristics:
+
+| Model              | Capacity | Max Cycles | Typical Use Case                             |
+| ------------------ | -------- | ---------- | -------------------------------------------- |
+| EcoSwap Pro 5000   | 5000 Wh  | 1000       | Standard commuter vehicles                   |
+| EcoSwap Ultra 7500 | 7500 Wh  | 1200       | Mid-range vehicles, small delivery vans      |
+| EcoSwap Max 10000  | 10000 Wh | 1500       | Long-range vehicles, commercial applications |
+
+Each battery in the system has a unique profile with individual performance metrics, allowing for precise monitoring and management of the entire battery fleet.
 
 ## Getting Started
 
-### Prerequisites
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Set up environment variables
+4. Run the development server with `npm run dev`
+5. Access the application at http://localhost:3000
 
-- Node.js 18+ and npm
-- MongoDB (local or Atlas)
-- Google OAuth credentials
+## Technologies Used
 
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/ranjith22556/ev-battery-swap-app.git
-   cd ev-battery-swap-app
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env.local` file in the root directory with the following variables:
-
-   ```
-   # MongoDB Connection String
-   MONGODB_URI=mongodb://localhost:27017/ecoswap
-
-   # NextAuth Configuration
-   NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=your_nextauth_secret
-
-   # Google OAuth
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_CLIENT_SECRET=your_google_client_secret
-   ```
-
-4. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Usage
-
-1. Sign in with your Google account
-2. Choose between Battery Swap or Bike Rental service
-3. Select a location from the map or list
-4. For bike rental, choose a bike and rental duration
-5. Complete the payment process
-6. Receive a PIN code for battery collection or bike rental
-
-## Screenshots
-
-![Home Page](screenshots/home.png)
-![Service Selection](screenshots/service-selection.png)
-![Payment Page](screenshots/payment.png)
-![Confirmation Page](screenshots/confirmation.png)
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Shadcn UI
+- MongoDB
+- NextAuth.js
+- Chart.js for data visualization
 
 ## License
 

@@ -218,6 +218,309 @@ export default function Home() {
           </div>
         </section>
 
+        {/* New Features Section */}
+        <section className="py-12 md:py-24">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Exciting Features</h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
+                  Discover all the ways to enhance your sustainable mobility experience
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
+              {/* Battery Health Card */}
+              <div className="gradient-card rounded-xl p-6 flex flex-col h-full">
+                <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                  <Battery className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Battery Health Monitoring</h3>
+                <p className="text-muted-foreground mb-6 flex-1">
+                  Our innovative battery health monitoring system provides real-time insights into your
+                  battery's performance, health status, and charge cycles. Track degradation over
+                  time, predict battery lifespan, and optimize your usage patterns for maximum
+                  efficiency and longevity.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <Zap className="h-4 w-4 text-primary mr-2" />
+                    <span className="text-sm">Real-time health metrics</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Zap className="h-4 w-4 text-primary mr-2" />
+                    <span className="text-sm">Charge cycle tracking</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Zap className="h-4 w-4 text-primary mr-2" />
+                    <span className="text-sm">Predictive lifespan analysis</span>
+                  </li>
+                </ul>
+                <Button asChild variant="gradient" className="mt-auto">
+                  <Link href={user ? "/battery-health" : "/"}>Monitor Your Battery</Link>
+                </Button>
+              </div>
+
+              {/* Dashboard Feature */}
+              <div className="gradient-card rounded-xl p-6 flex flex-col h-full">
+                <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-6 w-6 text-primary"
+                  >
+                    <path d="M5 22h14"></path>
+                    <path d="M5 2h14"></path>
+                    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"></path>
+                    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Personal Dashboard</h3>
+                <p className="text-muted-foreground mb-6 flex-1">
+                  Track your usage history, manage saved locations, and view your environmental impact with our intuitive dashboard.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Activity tracking</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Saved locations</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">CO₂ savings tracker</span>
+                  </li>
+                </ul>
+                <Button asChild variant="gradient" className="mt-auto">
+                  <Link href={user ? "/dashboard" : "/"}>View Dashboard</Link>
+                </Button>
+              </div>
+
+              {/* Rewards Feature */}
+              <div className="gradient-card rounded-xl p-6 flex flex-col h-full">
+                <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-6 w-6 text-primary"
+                  >
+                    <circle cx="12" cy="8" r="6"></circle>
+                    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Loyalty Rewards</h3>
+                <p className="text-muted-foreground mb-6 flex-1">
+                  Earn points with every swap and rental. Redeem for free services, discounts, and exclusive perks as you climb the membership tiers.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Points for every service</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Membership tiers</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Exclusive rewards</span>
+                  </li>
+                </ul>
+                <Button asChild variant="gradient" className="mt-auto">
+                  <Link href={user ? "/rewards" : "/"}>Explore Rewards</Link>
+                </Button>
+              </div>
+
+              {/* Community Feature */}
+              <div className="gradient-card rounded-xl p-6 flex flex-col h-full">
+                <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-6 w-6 text-primary"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Community Hub</h3>
+                <p className="text-muted-foreground mb-6 flex-1">
+                  Connect with other eco-conscious users, share experiences, join events, and compete on the leaderboard for sustainability achievements.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Social feed</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Community events</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-primary mr-2"
+                    >
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span className="text-sm">Sustainability leaderboard</span>
+                  </li>
+                </ul>
+                <Button asChild variant="gradient" className="mt-auto">
+                  <Link href={user ? "/community" : "/"}>Join Community</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-12 md:py-24">
           <div className="container px-4 md:px-6">

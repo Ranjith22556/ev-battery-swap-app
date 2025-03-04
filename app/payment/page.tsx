@@ -6,12 +6,14 @@ import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { batteryWarehouses, chargingStations, calculateFare, generatePin } from "@/lib/utils"
-import { Battery, Bike, CreditCard, Lock, Check } from "lucide-react"
+import { batteryWarehouses, chargingStations, calculateFare, generatePin, getBatteryPrice } from "@/lib/utils"
+import { Battery, Bike, CreditCard, Lock, Check, AlertTriangle, IndianRupee } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
 
 export default function Payment() {
   const { user, isLoading } = useAuth()
@@ -22,6 +24,7 @@ export default function Payment() {
   const id = searchParams.get("id") ? Number.parseInt(searchParams.get("id")!) : null
   const bikeId = searchParams.get("bike") ? Number.parseInt(searchParams.get("bike")!) : null
   const hours = searchParams.get("hours") ? Number.parseInt(searchParams.get("hours")!) : null
+  const batteryId = searchParams.get("batteryId") || null
 
   const [cardNumber, setCardNumber] = useState("")
   const [cardName, setCardName] = useState("")
@@ -34,9 +37,30 @@ export default function Payment() {
   const batteryWarehouse = id ? batteryWarehouses.find((w) => w.id === id) : null
   const chargingStation = id ? chargingStations.find((s) => s.id === id) : null
   const bike = bikeId && chargingStation ? chargingStation.availableBikes.find((b) => b.id === bikeId) : null
+  
+  // Get selected battery if batteryId is provided
+  const selectedBattery = batteryWarehouse && batteryId 
+    ? batteryWarehouse.batteries.find(b => b.id === batteryId) 
+    : null
 
-  // Calculate amount
-  const amount = type === "battery" ? 25 : hours ? calculateFare(hours) : 0
+  // Calculate amount based on battery health if a specific battery is selected
+  const amount = type === "battery" 
+    ? (selectedBattery ? getBatteryPrice(selectedBattery.healthPercentage) : 25) 
+    : hours ? calculateFare(hours) : 0
+
+  // Helper function to get health badge variant
+  const getHealthBadgeVariant = (health: number) => {
+    if (health < 50) return "destructive"
+    if (health < 70) return "secondary"
+    return "outline"
+  }
+
+  // Helper function to get health color
+  const getHealthColor = (health: number) => {
+    if (health < 50) return "text-red-600 dark:text-red-400"
+    if (health < 70) return "text-amber-600 dark:text-amber-400"
+    return "text-green-600 dark:text-green-400"
+  }
 
   // Redirect if not logged in or missing parameters
   useEffect(() => {
@@ -73,7 +97,7 @@ export default function Payment() {
       setTimeout(() => {
         // Redirect to confirmation page with the PIN
         router.push(
-          `/confirmation?type=${type}&id=${id}${type === "bike" ? `&bike=${bikeId}&hours=${hours}` : ""}&pin=${pin}`
+          `/confirmation?type=${type}&id=${id}${type === "bike" ? `&bike=${bikeId}&hours=${hours}` : ""}${batteryId ? `&batteryId=${batteryId}` : ""}&pin=${pin}`
         )
       }, 1000)
     }, 1500)
@@ -119,21 +143,104 @@ export default function Payment() {
                           </div>
                         </div>
 
+                        {/* Selected Battery Details */}
+                        {selectedBattery && (
+                          <div className="p-3 border border-border rounded-md">
+                            <div className="flex justify-between items-center mb-2">
+                              <h4 className="font-medium">Selected Battery</h4>
+                              <Badge variant={getHealthBadgeVariant(selectedBattery.healthPercentage)}>
+                                {selectedBattery.healthPercentage}% Health
+                              </Badge>
+                            </div>
+                            
+                            <div className="space-y-3">
+                              <div>
+                                <div className="flex items-center justify-between mb-1">
+                                  <div className="text-xs text-muted-foreground">Battery Health</div>
+                                  <div className={`text-xs ${getHealthColor(selectedBattery.healthPercentage)}`}>
+                                    {selectedBattery.healthPercentage}%
+                                  </div>
+                                </div>
+                                <Progress 
+                                  value={selectedBattery.healthPercentage} 
+                                  className={`h-1 ${selectedBattery.healthPercentage < 70 ? 'bg-red-200 dark:bg-red-800' : ''}`} 
+                                />
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-2 text-xs">
+                                <div>
+                                  <span className="text-muted-foreground">ID:</span>
+                                  <span className="ml-1">{selectedBattery.id.substring(0, 3)}****{selectedBattery.id.substring(selectedBattery.id.length - 2)}</span>
+                                </div>
+                                <div>
+                                  <span className="text-muted-foreground">Model:</span>
+                                  <span className="ml-1">{selectedBattery.model}</span>
+                                </div>
+                                <div>
+                                  <span className="text-muted-foreground">Range:</span>
+                                  <span className="ml-1">{selectedBattery.estimatedRangeKm} km</span>
+                                </div>
+                                <div>
+                                  <span className="text-muted-foreground">Cycles:</span>
+                                  <span className="ml-1">{selectedBattery.chargeCycles}</span>
+                                </div>
+                              </div>
+                              
+                              {/* Warning for low health batteries */}
+                              {selectedBattery.healthPercentage < 70 && (
+                                <div className="mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded text-xs text-amber-700 dark:text-amber-300 flex items-start">
+                                  <AlertTriangle className="h-3 w-3 mr-1 flex-shrink-0 mt-0.5" />
+                                  <span>
+                                    Limited range of {selectedBattery.estimatedRangeKm} km. Not recommended for long trips.
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                             <span className="text-muted-foreground">Battery Swap Fee:</span>
-                            <span>${amount}.00</span>
+                            <span className="flex items-center">
+                              <IndianRupee className="h-3 w-3 mr-0.5" />
+                              {amount.toFixed(2)}
+                            </span>
                           </div>
+                          
+                          {selectedBattery && (
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">Price Category:</span>
+                              <span>
+                                {selectedBattery.healthPercentage >= 90 ? "Premium" : 
+                                 selectedBattery.healthPercentage >= 70 ? "Standard" : "Economy"}
+                              </span>
+                            </div>
+                          )}
+                          
                           <div className="flex justify-between text-sm">
                             <span className="text-muted-foreground">Available Batteries:</span>
                             <span>{batteryWarehouse.availableBatteries}</span>
                           </div>
                         </div>
 
+                        {/* Pricing Tiers */}
+                        {!selectedBattery && (
+                          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
+                            <h4 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-1">Tiered Pricing Available</h4>
+                            <p className="text-xs text-blue-700 dark:text-blue-300">
+                              Select a specific battery on the previous screen to see our tiered pricing based on battery health.
+                            </p>
+                          </div>
+                        )}
+
                         <div className="pt-4 border-t border-border">
                           <div className="flex justify-between font-medium">
                             <span>Total:</span>
-                            <span>${amount}.00</span>
+                            <span className="flex items-center">
+                              <IndianRupee className="h-4 w-4 mr-0.5" />
+                              {amount.toFixed(2)}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -168,14 +275,20 @@ export default function Payment() {
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-muted-foreground">Rate:</span>
-                            <span>$10.00 per hour</span>
+                            <span className="flex items-center">
+                              <IndianRupee className="h-3 w-3 mr-0.5" />
+                              750.00 per hour
+                            </span>
                           </div>
                         </div>
 
                         <div className="pt-4 border-t border-border">
                           <div className="flex justify-between font-medium">
                             <span>Total:</span>
-                            <span>${amount}.00</span>
+                            <span className="flex items-center">
+                              <IndianRupee className="h-4 w-4 mr-0.5" />
+                              {amount}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -285,7 +398,10 @@ export default function Payment() {
                                 Processing Payment...
                               </>
                             ) : (
-                              `Pay $${amount}.00`
+                              <span className="flex items-center justify-center">
+                                <IndianRupee className="h-4 w-4 mr-1" />
+                                Pay {amount.toFixed(2)}
+                              </span>
                             )}
                           </Button>
                         </div>
