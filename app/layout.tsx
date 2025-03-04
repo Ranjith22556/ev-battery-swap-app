@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "EcoSwap | EV Battery Swapping & Bike Rental",
   description: "Sustainable mobility solutions with battery swapping and bike rental services",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -40,7 +40,5 @@ export default function RootLayout({
     </html>
   )
 }
-
-
 
 import './globals.css'
