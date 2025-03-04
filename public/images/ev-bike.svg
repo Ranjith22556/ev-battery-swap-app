@@ -1,0 +1,38 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <rect width="1200" height="800" fill="url(#paint0_linear)" />
+  
+  <!-- Bike frame -->
+  <path d="M400 500 L500 350 L650 350 L700 500 Z" stroke="#00C07A" stroke-width="15" fill="none" />
+  <path d="M700 500 L800 350" stroke="#00C07A" stroke-width="15" fill="none" />
+  <path d="M550 350 L550 250" stroke="#00C07A" stroke-width="15" fill="none" />
+  
+  <!-- Wheels -->
+  <circle cx="400" cy="500" r="100" stroke="#00C07A" stroke-width="15" fill="none" />
+  <circle cx="400" cy="500" r="90" stroke="#00C07A" stroke-width="5" fill="none" />
+  <circle cx="700" cy="500" r="100" stroke="#00C07A" stroke-width="15" fill="none" />
+  <circle cx="700" cy="500" r="90" stroke="#00C07A" stroke-width="5" fill="none" />
+  
+  <!-- Handlebars -->
+  <path d="M800 350 L850 300" stroke="#00C07A" stroke-width="15" fill="none" />
+  
+  <!-- Seat -->
+  <path d="M550 250 L600 250" stroke="#00C07A" stroke-width="15" fill="none" />
+  
+  <!-- Battery -->
+  <rect x="525" y="400" width="50" height="80" rx="5" fill="#00C07A" />
+  
+  <!-- Electric symbol -->
+  <path d="M540 420 L560 440 L540 460 L560 480" stroke="white" stroke-width="5" fill="none" />
+  
+  <!-- Text -->
+  <text x="600" y="650" font-family="Arial" font-size="48" fill="white">EV Bike</text>
+  
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111111" />
+      <stop offset="1" stop-color="#003018" />
+    </linearGradient>
+  </defs>
+</svg> 
